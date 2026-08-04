@@ -1,0 +1,961 @@
+/* ============================================================
+   SPONSOR-STYLE.CSS — DRAMA ARENA 540 (MODERN ANIMATED EDITION)
+   ============================================================ */
+
+:root {
+    --bg-dark: #070709;
+    --card-bg: rgba(20, 20, 26, 0.65);
+    --gold-primary: #f0c442;
+    --gold-secondary: #b8860b;
+    --gold-glow: rgba(240, 196, 66, 0.25);
+    --text-white: #ffffff;
+    --text-muted: #a0a0ab;
+    --border-color: rgba(240, 196, 66, 0.18);
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    position: relative;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ==========================================
+   1. AMBIENT GLOW ANIMATION
+   ========================================== */
+.glow-effect {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    pointer-events: none;
+    z-index: 0;
+    animation: pulseGlow 8s ease-in-out infinite alternate;
+}
+
+.glow-top {
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 650px;
+    height: 450px;
+    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+}
+
+.glow-bottom {
+    bottom: 5%;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(184, 134, 11, 0.15) 0%, transparent 70%);
+}
+
+@keyframes pulseGlow {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+    100% { transform: translateX(-50%) scale(1.15); opacity: 1; }
+}
+
+/* ==========================================
+   2. SCROLL REVEAL ANIMATIONS
+   ========================================== */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================
+   3. NAVBAR & HEADER
+   ========================================== */
+.sponsor-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(7, 7, 9, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 0;
+    transition: all 0.3s ease;
+}
+
+.nav-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.nav-logo-img {
+    height: 42px;
+    width: auto;
+    transition: transform 0.4s var(--ease-out-back);
+}
+
+.brand-logo:hover .nav-logo-img {
+    transform: rotate(-8deg) scale(1.1);
+}
+
+.brand-text {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text-white);
+}
+
+.brand-text span { color: var(--gold-primary); }
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-icon-nav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    color: var(--gold-primary);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-icon-nav:hover {
+    background: var(--gold-primary);
+    color: #000;
+    box-shadow: 0 0 20px var(--gold-glow);
+}
+
+.btn-download-nav {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+    color: #000;
+    padding: 10px 22px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+.btn-download-nav:hover {
+    box-shadow: 0 0 25px var(--gold-glow);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   4. HERO SECTION
+   ========================================== */
+.sponsor-hero {
+    padding: 100px 0 70px 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(240, 196, 66, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--gold-primary);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    margin-bottom: 28px;
+    backdrop-filter: blur(10px);
+}
+
+.hero-logo-img {
+    height: 130px;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 0 35px var(--gold-glow));
+    animation: floatLogo 5s ease-in-out infinite alternate;
+}
+
+@keyframes floatLogo {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-12px); }
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-title span {
+    background: linear-gradient(135deg, #ffffff 30%, var(--gold-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    max-width: 680px;
+    margin: 0 auto 40px auto;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.btn-primary-gold {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+    color: #000;
+    border: none;
+    padding: 16px 34px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.98rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    box-shadow: 0 6px 25px var(--gold-glow);
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+.btn-primary-gold:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 35px rgba(240, 196, 66, 0.45);
+}
+
+.btn-secondary-outline {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    color: var(--gold-primary);
+    padding: 16px 34px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.98rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary-outline:hover {
+    background: rgba(240, 196, 66, 0.12);
+    border-color: var(--gold-primary);
+    transform: translateY(-3px);
+}
+
+/* ==========================================
+   5. STATS SECTION
+   ========================================== */
+.sponsor-stats { padding: 60px 0; }
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 36px 28px;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    transition: transform 0.4s var(--ease-out-expo), border-color 0.4s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold-primary);
+}
+
+.stat-icon {
+    font-size: 2.2rem;
+    color: var(--gold-primary);
+    margin-bottom: 12px;
+}
+
+.stat-card h3 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.stat-card p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+}
+
+/* ==========================================
+   6. PACKAGES SECTION & 3D HOVER EFFECT
+   ========================================== */
+.packages-section { padding: 80px 0; }
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.sub-title {
+    color: var(--gold-primary);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.section-title h2 {
+    font-family: var(--font-heading);
+    font-size: 2.6rem;
+    margin-top: 6px;
+}
+
+.gold-line {
+    width: 60px;
+    height: 3px;
+    background: var(--gold-primary);
+    margin: 14px auto 0 auto;
+    border-radius: 2px;
+}
+
+/* ==========================================
+   PACKAGES SECTION (ULTRA CLEAN & BALANCED)
+   ========================================== */
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    align-items: stretch; /* Memaksa semua kartu memiliki tinggi yang SAMA PRESISI */
+    margin-top: 40px;
+}
+
+.pkg-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 40px 28px 32px 28px;
+    text-align: center;
+    position: relative;
+    backdrop-filter: blur(16px);
+    
+    /* Layout Flexbox Vertikal agar tombol selalu terdorong ke paling bawah */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.pkg-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(240, 196, 66, 0.4);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--gold-glow);
+}
+
+.pkg-card.featured {
+    border-color: var(--gold-primary);
+    background: rgba(240, 196, 66, 0.03);
+    box-shadow: 0 0 30px rgba(240, 196, 66, 0.12);
+}
+
+/* Badge Terfavorit */
+.badge-featured {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+    color: #000;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 5px 16px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pkg-tier {
+    font-family: var(--font-heading) !important;
+    color: var(--gold-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+/* HARGA DISESUAIKAN AGAR LEBIH RAPI & TIDAK METET/TUMPANG TINDIH */
+.pkg-price {
+    font-size: 1.65rem; /* Penyesuaian font agar range harga muat 1 baris */
+    font-weight: 800;
+    margin: 10px 0 24px 0;
+    color: var(--text-white);
+    line-height: 1.2;
+    min-height: 52px; /* Menjaga konsistensi jarak bawah harga */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Penyesuaian khusus untuk teks range harga panjang */
+.pkg-price.range-price {
+    font-size: 1.35rem; 
+}
+
+/* LIST FITUR DENGAN ALIGNMENT KIRI YANG RAPI */
+.pkg-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 28px;
+    padding: 0;
+    flex-grow: 1; /* Mendorong tombol ke bawah secara konsisten */
+}
+
+.pkg-features li {
+    font-size: 0.88rem;
+    color: #d0d0d8;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+}
+
+.pkg-features i {
+    color: var(--gold-primary);
+    font-size: 1.05rem;
+    flex-shrink: 0; /* Menjaga icon checklist tidak mengkerut */
+    margin-top: 1px;
+}
+
+/* TOMBOL AKSI SEJAJAR DI BAGIAN BAWAH */
+.btn-pkg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 13px;
+    border: 1px solid var(--border-color);
+    color: var(--gold-primary);
+    background: transparent;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-pkg:hover, 
+.pkg-card.featured .btn-pkg {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+    color: #000;
+    border-color: transparent;
+    box-shadow: 0 4px 18px var(--gold-glow);
+}
+
+/* ==========================================
+   7. GALERI PRATINJAU PROPOSAL & LIGHTBOX
+   ========================================== */
+.preview-section { padding: 70px 0; }
+
+/* ==========================================
+   GALERI PRATINJAU PROPOSAL (4 KOLOM KE SAMPING)
+   ========================================== */
+.preview-grid {
+    display: grid;
+    /* Mengubah grid menjadi 4 kolom sejajar dengan lebar sama */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; /* Jarak antar kartu pratinjau */
+    margin-top: 40px;
+}
+
+.preview-card {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    cursor: pointer;
+    transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease, border-color 0.4s ease;
+    /* Rasio A4 / Lembar Proposal */
+    aspect-ratio: 3 / 4; 
+}
+
+/* RESPONSIVITAS TAMPILAN (Layar Laptop, Tablet & HP) */
+@media (max-width: 1200px) {
+    .preview-grid {
+        grid-template-columns: repeat(3, 1fr); /* Tampilan laptop/tablet besar (3 kolom) */
+    }
+}
+
+@media (max-width: 768px) {
+    .preview-grid {
+        grid-template-columns: repeat(2, 1fr); /* Tampilan tablet sedang (2 kolom) */
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .preview-grid {
+        grid-template-columns: 1fr; /* Tampilan HP (1 kolom menumpuk) */
+    }
+}
+.preview-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--ease-out-expo);
+}
+
+.preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 7, 9, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--gold-primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    opacity: 0;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(6px);
+}
+
+.preview-overlay i {
+    font-size: 2.2rem;
+    transform: translateY(15px);
+    transition: transform 0.4s var(--ease-out-back);
+}
+
+.preview-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px var(--gold-glow);
+    border-color: var(--gold-primary);
+}
+
+.preview-card:hover img { transform: scale(1.08); }
+
+.preview-card:hover .preview-overlay { opacity: 1; }
+
+.preview-card:hover .preview-overlay i { transform: translateY(0); }
+
+/* ULTRA-MODERN LIGHTBOX MODAL */
+.image-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(4, 4, 6, 0.88);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s var(--ease-out-expo), visibility 0.4s ease;
+    padding: 24px;
+}
+
+.image-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
+    object-fit: contain;
+    transform: scale(0.85) translateY(20px);
+    transition: transform 0.5s var(--ease-out-back);
+    will-change: transform;
+}
+
+.image-modal.active .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.modal-caption {
+    margin-top: 20px;
+    color: var(--gold-primary);
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    line-height: 1;
+    transition: transform 0.3s var(--ease-out-back), color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: var(--gold-primary);
+    transform: rotate(90deg) scale(1.2);
+}
+
+/* ==========================================
+   8. CTA & FOOTER
+   ========================================== */
+.cta-sponsor {
+    padding: 80px 0;
+    background: rgba(255, 255, 255, 0.01);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cta-sponsor p {
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 14px auto 32px auto;
+    line-height: 1.6;
+}
+
+.btn-wa {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: #fff;
+    padding: 16px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+.btn-wa:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+}
+
+footer {
+    padding: 32px 0;
+    text-align: center;
+    color: #555;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* TOAST NOTIFICATION */
+.toast-notif {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+    color: #000;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 50px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px) scale(0.9);
+    transition: all 0.4s var(--ease-out-back);
+    z-index: 10000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toast-notif.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* ==========================================
+   9. INTERACTIVE JS ANIMATION CLASSES
+   ========================================== */
+.btn-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: rippleEffect 0.6s cubic-bezier(0, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+.btn-click-active {
+    transform: scale(0.92) !important;
+    transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.3, 1) !important;
+}
+
+.gold-particle {
+    position: fixed;
+    background: radial-gradient(circle, #ffffff 10%, var(--gold-primary) 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    box-shadow: 0 0 12px var(--gold-primary);
+}
+
+.spin-icon {
+    display: inline-block;
+    animation: spinRotate 0.8s infinite linear;
+}
+
+@keyframes spinRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 992px) {
+    .grid-3, .packages-grid, .preview-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2.5rem; }
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px; /* Jarak rapi antar tombol */
+    flex-wrap: wrap; /* Agar otomatis menyesuaikan saat dibuka di HP */
+    margin-top: 10px;
+}
+
+/* Mengatur ukuran tombol outline agar konsisten */
+.btn-secondary-outline {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    color: var(--gold-primary);
+    padding: 16px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary-outline:hover {
+    background: rgba(240, 196, 66, 0.12);
+    border-color: var(--gold-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(240, 196, 66, 0.15);
+}
+
+/* ============================================================
+   1. IMPORT FONT CUSTOM (AMBOQIA)
+   ============================================================ */
+@font-face {
+    font-family: 'Amboqia Boriango';
+    src: url('../fonts/AmboqiaBoriango.ttf') format('truetype'),
+         url('../fonts/AmboqiaBoriango.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --bg-dark: #070709;
+    --card-bg: rgba(20, 20, 26, 0.65);
+    --gold-primary: #f0c442;
+    --gold-secondary: #b8860b;
+    --gold-glow: rgba(240, 196, 66, 0.25);
+    --text-white: #ffffff;
+    --text-muted: #a0a0ab;
+    --border-color: rgba(240, 196, 66, 0.18);
+    
+    /* Ganti font heading utama ke Amboqia */
+    --font-heading: 'Amboqia', 'Cinzel', serif; 
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ============================================================
+   2. PENERAPAN FONT AMBOQIA PADA ELEMEN-ELEMEN PENTING
+   ============================================================ */
+
+/* A. Brand / Logo Text Navbar */
+.brand-text {
+    font-family: var(--font-heading) !important;
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: 0.5px;
+}
+
+/* B. Judul Utama Hero Section ("Panggung Mahakarya Drama Arena 540") */
+.hero-title {
+    font-family: var(--font-heading) !important;
+    font-size: 3.8rem; /* Sedikit diperbesar agar karakteristik font Amboqia lebih menonjol */
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* C. Judul-Judul Seksi ("Paket Sponsorship", "Pratinjau Lembar Proposal", dll) */
+.section-title h2 {
+    font-family: var(--font-heading) !important;
+    font-size: 2.8rem;
+    margin-top: 6px;
+    letter-spacing: 0.8px;
+}
+
+/* D. Judul Call To Action (Seksi Negosiasi/Custom) */
+.cta-sponsor h2 {
+    font-family: var(--font-heading) !important;
+    font-size: 2.4rem;
+    letter-spacing: 0.5px;
+}
+
+/* E. Nama Tier Paket Sponsorship (Platinum, Gold, Silver) */
+.pkg-tier {
+    font-family: var(--font-heading) !important;
+    color: var(--gold-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/* F. Sub-title Emas Kecil di Atas Judul Seksi */
+.sub-title {
+    font-family: var(--font-heading) !important;
+    color: var(--gold-primary);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+}
+
+/* ==========================================
+   NAVBAR STYLE DENGAN EFEK UNDERLINE EMAS
+   ========================================== */
+.sponsor-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(7, 7, 9, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 14px 0;
+    transition: all 0.3s ease;
+}
+
+.nav-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* LIST MENU NAVIGATION */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px; /* Jarak antar teks menu */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: #a0a0ab;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 8px;
+    transition: color 0.3s ease;
+    font-family: var(--font-body);
+}
+
+/* Efek Hover Teks */
+.nav-links li a:hover {
+    color: #ffffff;
+}
+
+/* Garis Bawah Emas (Underline Animasi) */
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-primary), var(--gold-secondary));
+    border-radius: 2px;
+    transition: width 0.3s var(--ease-out-expo);
+    box-shadow: 0 0 10px var(--gold-glow);
+}
+
+.nav-links li a:hover::after,
+.nav-links li a.active::after {
+    width: 100%; /* Garis emas memanjang penuh saat di-hover/aktif */
+}
+
+/* Menu Yang Sedang Aktif */
+.nav-links li a.active {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* RESPONSIVE NAVBAR UNTUK LAYAR KECIL */
+@media (max-width: 992px) {
+    .nav-links {
+        display: none; /* Sembunyikan menu teks di HP/Tablet agar tidak semrawut */
+    }
+}

@@ -1,0 +1,1594 @@
+/* =========================================================
+   VARIABLES & DESIGN SYSTEM
+   ========================================================= */
+:root {
+    --bg-main: #090504;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-glass: rgba(20, 10, 8, 0.65);
+    
+    --accent-gold: #d6a75c;
+    --accent-gold-glow: rgba(214, 167, 92, 0.35);
+    --accent-red: #b51d2c;
+    --accent-red-glow: rgba(181, 29, 44, 0.45);
+    
+    --text-white: #ffffff;
+    --text-muted: #a0a0a0;
+    
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 8px;
+    
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================================
+   RESET & BASE STYLES
+   ========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    width: 90%;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.section-padding {
+    padding: 100px 0;
+}
+
+/* Ambient Lighting Effect */
+.ambient-glow {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.glow-1 {
+    top: -100px;
+    left: -100px;
+    background: var(--accent-red-glow);
+}
+
+.glow-2 {
+    bottom: 10%;
+    right: -100px;
+    background: var(--accent-gold-glow);
+}
+
+/* Custom Glassmorphism Classes */
+.glass-panel {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.glass-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(214, 167, 92, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.navbar.scrolled {
+    padding: 14px 0;
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-glass);
+}
+
+.navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo img {
+    height: 42px;
+    width: auto;
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.logo-text span {
+    color: var(--accent-gold);
+}
+
+.nav-menu {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-white);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-gold);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.btn-glow {
+    padding: 10px 24px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--accent-gold), #aa7d37);
+    color: #000;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 0 20px var(--accent-gold-glow);
+}
+
+.btn-glow:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(214, 167, 92, 0.6);
+}
+
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-white);
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
+.hero {
+    min-height: 100vh;
+    padding-top: 130px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: radial-gradient(circle at 20% 30%, rgba(181, 29, 44, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(214, 167, 92, 0.1) 0%, transparent 50%);
+}
+
+.hero-wrapper {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.badge-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 50px;
+    background: rgba(214, 167, 92, 0.1);
+    border: 1px solid rgba(214, 167, 92, 0.3);
+    color: var(--accent-gold);
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    line-height: 0.95;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.text-accent { color: var(--accent-red); }
+.text-gradient {
+    background: linear-gradient(135deg, #ffffff, var(--accent-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 540px;
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    background: var(--accent-red);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 10px 25px var(--accent-red-glow);
+}
+
+.btn-primary:hover {
+    background: #d42234;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 50px;
+    background: transparent;
+    border: 1px solid var(--border-glass);
+    color: white;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent-gold);
+}
+
+.hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.stat-num {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.stat-divider {
+    width: 1px;
+    height: 35px;
+    background: var(--border-glass);
+}
+
+/* Feature Glass Card in Hero */
+.hero-feature-card {
+    padding: 35px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+
+.card-tag {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--accent-gold);
+    margin-bottom: 12px;
+}
+
+.hero-feature-card h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.hero-feature-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+/* Countdown */
+.countdown-box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    text-align: center;
+}
+
+.time-unit {
+    background: rgba(0,0,0,0.4);
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-glass);
+}
+
+.time-unit span {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+}
+
+.time-unit small {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.scroll-indicator i {
+    color: var(--accent-gold);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
+}
+
+/* =========================================================
+   SECTION HEADERS
+   ========================================================= */
+.section-header {
+    margin-bottom: 60px;
+}
+
+.sub-title {
+    color: var(--accent-gold);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.main-title {
+    font-family: var(--font-heading);
+    font-size: 3.2rem;
+    margin-top: 10px;
+}
+
+.title-line {
+    width: 60px;
+    height: 3px;
+    background: var(--accent-red);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+/* =========================================================
+   ABOUT SECTION
+   ========================================================= */
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.feature-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-sm);
+}
+
+.feature-card i {
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+}
+
+.feature-card h4 {
+    font-size: 1.05rem;
+    margin-bottom: 5px;
+}
+
+.feature-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* =========================================================
+   TIMELINE SCHEDULE
+   ========================================================= */
+.schedule-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 25px 30px;
+}
+
+.timeline-item.highlight-border {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 20px var(--accent-gold-glow);
+}
+
+.time-badge {
+    padding: 8px 18px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.time-badge.accent {
+    background: var(--accent-gold);
+    color: #000;
+}
+
+.timeline-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+}
+
+.timeline-content p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.gallery-item {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.gallery-thumb i {
+    font-size: 3rem;
+    color: var(--accent-gold);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.gallery-thumb span {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* =========================================================
+   FOOTER & MODAL
+   ========================================================= */
+.footer {
+    border-top: 1px solid var(--border-glass);
+    padding: 40px 0;
+    background: #050302;
+}
+
+.footer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-brand h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+}
+
+.footer-brand h3 span { color: var(--accent-gold); }
+
+.footer-brand p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-socials a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-glass);
+}
+
+.footer-socials a:hover {
+    background: var(--accent-gold);
+    color: #000;
+}
+
+/* Video Modal */
+.video-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.video-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Rasio aspek 16:9 pas untuk video YouTube */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #000;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
+@media (max-width: 992px) {
+    .hero-wrapper {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 3.8rem;
+    }
+
+    .hero-desc {
+        margin: 0 auto 35px;
+    }
+
+    .hero-buttons, .hero-stats {
+        justify-content: center;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        height: 100vh;
+        background: #0d0706;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: var(--transition);
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-wrapper {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+
+/* =========================================================
+   CUSTOM FONT IMPORT (AMBOQIA BORIANGO)
+   ========================================================= */
+@font-face {
+    font-family: 'Amboqia Boriango';
+    src: url('../fonts/AmboqiaBoriango.ttf') format('truetype'),
+         url('../fonts/AmboqiaBoriango.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* =========================================================
+   IMPORT FONT ARAB LOKAL
+   ========================================================= */
+@font-face {
+    font-family: 'CustomArabicFont';
+    /* Ganti nama file di bawah sesuai dengan nama file font Arab di folder fonts Anda */
+    src: url('../fonts/DecoType Thuluth.TTF') format('truetype'),
+         url('../fonts/DecoType Thuluth.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* =========================================================
+   HERO CENTER STYLE (ISLAMI MEWAH)
+   ========================================================= */
+.hero-center {
+    min-height: 100vh;
+    padding: 120px 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: radial-gradient(circle at center, rgba(30, 15, 10, 0.9) 0%, rgba(9, 5, 4, 1) 80%);
+    text-align: center;
+}
+
+.hero-center-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+/* Badge Top */
+.hero-badge-top {
+    border: 1px solid rgba(214, 167, 92, 0.3);
+    padding: 4px 16px;
+    border-radius: 50px;
+    background: rgba(214, 167, 92, 0.05);
+    margin-bottom: 35px;
+}
+
+.hero-badge-top span {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: #d6a75c;
+    font-weight: 500;
+}
+
+/* Emblem Logo */
+.hero-emblem-box {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.hero-emblem-img {
+    width: 170px;
+    height: auto;
+    filter: drop-shadow(0 0 25px rgba(214, 167, 92, 0.5));
+    transition: transform 0.5s ease;
+}
+
+.hero-emblem-img:hover {
+    transform: scale(1.05);
+}
+
+.emblem-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: rgba(214, 167, 92, 0.2);
+    filter: blur(50px);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* Title Typography */
+.sub-heading-small {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+    color: #a0a0a0;
+    margin-bottom: 8px;
+}
+
+/* FONT AMBOQIA BORIANGO IMPLEMENTATION */
+.custom-font-title {
+    font-family: 'Amboqia Boriango', 'Cormorant Garamond', serif;
+    font-size: 4.5rem;
+    color: #d6a75c;
+    line-height: 1.1;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(214, 167, 92, 0.3);
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.sub-heading-large {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    letter-spacing: 6px;
+    color: #ffffff;
+    margin-top: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.roman-numeral {
+    font-size: 0.85rem;
+    letter-spacing: 8px;
+    color: #d6a75c;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+/* Divider Dots */
+.divider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 25px 0;
+}
+
+.divider-dots span {
+    width: 5px;
+    height: 5px;
+    background: #d6a75c;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+/* Description */
+.hero-center-desc {
+    font-size: 0.95rem;
+    color: #cccccc;
+    line-height: 1.8;
+    max-width: 650px;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+/* Buttons */
+.hero-center-actions {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.btn-gold-filled {
+    padding: 12px 36px;
+    background: linear-gradient(135deg, #d6a75c, #9e7533);
+    color: #0d0706;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(214, 167, 92, 0.3);
+}
+
+.btn-gold-filled:hover {
+    background: linear-gradient(135deg, #e6b86e, #b88a44);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(214, 167, 92, 0.5);
+}
+
+.btn-gold-outline {
+    padding: 12px 28px;
+    background: transparent;
+    border: 1px solid rgba(214, 167, 92, 0.4);
+    color: #d6a75c;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-gold-outline:hover {
+    border-color: #d6a75c;
+    background: rgba(214, 167, 92, 0.1);
+    color: #ffffff;
+}
+
+/* Footer Tag In Hero */
+.hero-footer-tag {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Font Size */
+@media (max-width: 768px) {
+    .custom-font-title {
+        font-size: 3rem;
+    }
+    .sub-heading-large {
+        font-size: 1.2rem;
+    }
+    .hero-center-actions {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* =========================================================
+   COUNTDOWN CARD (LUXURIOUS GOLD STYLE)
+   ========================================================= */
+.countdown-wrapper {
+    max-width: 800px;
+    margin: 0 auto 40px auto; /* Memberi jarak ke kartu jadwal bawahnya */
+}
+
+.countdown-card {
+    background: rgba(18, 10, 8, 0.75);
+    border: 1px solid rgba(214, 167, 92, 0.4);
+    box-shadow: 0 0 25px rgba(214, 167, 92, 0.15);
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    backdrop-filter: blur(12px);
+}
+
+.countdown-header {
+    margin-bottom: 25px;
+}
+
+.countdown-tag {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: #d6a75c;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.countdown-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+/* Box Digits */
+.countdown-boxes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.time-box {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(214, 167, 92, 0.25);
+    border-radius: 12px;
+    padding: 15px 20px;
+    min-width: 85px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.time-box:hover {
+    border-color: #d6a75c;
+    transform: translateY(-3px);
+}
+
+.time-box span {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #d6a75c;
+    line-height: 1;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.time-box small {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: #a0a0a0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.time-colon {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #d6a75c;
+    margin-bottom: 15px;
+    opacity: 0.6;
+}
+
+/* Responsive Layout */
+@media (max-width: 576px) {
+    .countdown-boxes {
+        gap: 6px;
+    }
+    
+    .time-box {
+        padding: 10px 8px;
+        min-width: 65px;
+    }
+
+    .time-box span {
+        font-size: 1.6rem;
+    }
+
+    .time-colon {
+        display: none; /* Sembunyikan titik dua di layar HP agar muat */
+    }
+
+    .countdown-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* Container Kutipan */
+.hero-quote-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px; /* Jarak antara teks Arab dan Latin */
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* Style Teks Arab */
+/* Style Teks Arab Menggunakan Font Lokal */
+.arabic-text {
+    font-family: 'CustomArabicFont', serif; /* Memanggil font lokal */
+    font-size: 1.8rem; /* Sesuaikan ukuran teks agar terlihat pas */
+    line-height: 2.2;  /* Harakat tidak akan bertabrakan */
+    color: #d6a75c;
+    direction: rtl;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+/* Style Teks Latin */
+.latin-text {
+    font-size: 0.95rem;
+    color: #cccccc;
+    line-height: 1.7;
+    font-weight: 300;
+    max-width: 650px;
+}
+
+/* Terapkan font Amboqia Boriango pada logo navbar */
+.logo-text.logo-amboqia {
+    font-family: 'Amboqia Boriango', 'Cormorant Garamond', serif;
+    font-size: 1.5rem; /* Ukuran bisa disesuaikan */
+    letter-spacing: 2px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+/* Warna untuk angka 540 agar tetap serasi */
+.logo-text.logo-amboqia span {
+    color: #d6a75c; /* Warna emas */
+    font-family: 'Amboqia Boriango', 'Cormorant Garamond', serif;
+}
+
+/* Layout Grid Pembimbing */
+.advisor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+}
+
+/* Kartu Tanpa Foto (Gaya Minimalis Emas) */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 160, 89, 0.2); /* Ring Emas Tipis */
+    border-radius: 20px;
+    padding: 35px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+}
+
+/* Efek Hover Glowing Emas */
+.glass-card:hover {
+    transform: translateY(-6px);
+    border-color: #c5a059;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(197, 160, 89, 0.2);
+}
+
+/* Lingkaran Ikon / Monogram di Tengah */
+.advisor-icon-box {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(197, 160, 89, 0.2), rgba(0, 0, 0, 0.4));
+    border: 1px solid #c5a059;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c5a059;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+}
+
+.glass-card:hover .advisor-icon-box {
+    background: #c5a059;
+    color: #111; /* Warna ikon berubah hitam emas saat di-hover */
+    transform: scale(1.08);
+}
+
+/* Teks Jabatan / Label */
+.advisor-role {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #c5a059;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+/* Teks Nama Ustaz */
+.advisor-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Layout Grid khusus Sponsorship */
+.sponsor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 30px;
+}
+
+/* Seksi Sponsorship */
+.sponsor-section {
+    padding: 50px 0;
+}
+
+/* Kartu Pembungkus Sponsor */
+.sponsor-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sponsor-card:hover {
+    transform: translateY(-6px);
+    border-color: #c5a059;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+                0 0 20px rgba(197, 160, 89, 0.2);
+}
+
+/* Wadah Logo (Kunci utama agar tidak terpotong) */
+.sponsor-logo-box {
+    width: 100%;
+    height: 90px; /* Tinggi disesuaikan agar logo tampil proporsional */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    padding: 5px;
+}
+
+/* Pengaturan Gambar Logo */
+.sponsor-logo-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Dijamin logo tidak melar atau terpotong */
+    filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.5));
+    transition: transform 0.3s ease;
+}
+
+.sponsor-card:hover .sponsor-logo-box img {
+    transform: scale(1.05); /* Logo membesar tipis saat di-hover */
+}
+
+.sponsor-role {
+    display: block;
+    font-size: 0.75rem;
+    color: #c5a059;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+}
+
+/* Teks Nama Perusahaan */
+.sponsor-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+}
+
+@media (max-width: 992px) {
+    .sponsor-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* Styling Dasar Kartu */
+.card-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Border default redup */
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.4s ease; /* Transisi halus */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Saat Cursor Diarahkan ke Kartu (HOVER) */
+.card-item:hover {
+    border-color: #c5a059; /* Warna kuning/emas khas Drama Arena */
+    
+    /* Efek bayangan menyala di sekeliling garis */
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.3), 
+                inset 0 0 10px rgba(197, 160, 89, 0.1);
+                
+    transform: translateY(-3px); /* Naik sedikit saat di-hover */
+}
+
+.card-item {
+    position: relative;
+    background: #111;
+    border-radius: 16px;
+    padding: 30px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+/* Efek Sorot Cahaya di Background Kartu */
+.card-item::before {
+    content: '';
+    position: absolute;
+    top: var(--mouse-y, -100px);
+    left: var(--mouse-x, -100px);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(197, 160, 89, 0.4) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-item:hover::before {
+    opacity: 1;
+}
+
+.card-item:hover {
+    border-color: rgba(197, 160, 89, 0.6);
+}
+
+/* Seksi Ketua - Menghilangkan Jarak Hitam Raksasa */
+.leader-section {
+    padding: 50px 0;
+}
+/* Grid Khusus Ketua (Auto Rapi) */
+.leader-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Otomatis membagi 3 kolom sama rata ke samping */
+    gap: 24px;
+    margin-top: 30px;
+}
+
+/* Kartu Pembungkus Ketua */
+.leader-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    border-radius: 20px;
+    padding: 35px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    transition: all 0.4s ease;
+}
+
+.leader-card:hover {
+    transform: translateY(-6px);
+    border-color: #c5a059;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+                0 0 20px rgba(197, 160, 89, 0.2);
+}
+
+.leader-icon-box {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 18px auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(197, 160, 89, 0.2), rgba(0, 0, 0, 0.4));
+    border: 1px solid #c5a059;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c5a059;
+    font-size: 1.6rem;
+    font-weight: 700;
+    transition: all 0.4s ease;
+}
+
+.leader-card:hover .leader-icon-box {
+    background: #c5a059;
+    color: #111;
+    transform: scale(1.08);
+}
+
+/* Wadah Foto Proporsional */
+.leader-img-box {
+    width: 100%;
+    height: 280px; /* Ukuran tinggi pas untuk foto profil */
+    border-radius: 12px;
+    overflow: hidden;
+    background: #111;
+    margin-bottom: 16px;
+}
+
+.leader-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Menutupi seluruh area tanpa gepeng */
+    object-position: center 15%; /* Fokus ke area wajah/dada */
+}
+
+/* Nama & Jabatan */
+/* Teks Nama Ketua */
+.leader-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+}
+
+.leader-role {
+    display: block;
+    font-size: 0.75rem;
+    color: #c5a059;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+}
+
+/* Container Utama untuk Mengatur Posisi di Tengah Halaman */
+.team-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Agar tepat di tengah layar */
+    background-color: #0c0c0c; /* Latar gelap pekat Drama Arena */
+    font-family: 'Poppins', sans-serif; /* Font modern yang bersih */
+}
+
+/* Kartu Utama: Efek Kaca Transparan Emas */
+.team-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    border-radius: 20px;
+    padding: 30px 24px;
+    width: 300px; /* Lebar dibatasi agar tidak melar */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    transition: all 0.4s ease;
+}
+
+/* Efek Hover (Saat Cursor Diarahkan ke Kartu) */
+.team-card:hover {
+    transform: translateY(-6px);
+    border-color: #c5a059;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+                0 0 20px rgba(197, 160, 89, 0.2);
+}
+
+/* Wadah Avatar (Lingkaran Emas) */
+.team-avatar {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 16px auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(197, 160, 89, 0.2), rgba(0, 0, 0, 0.4));
+    border: 1px solid #c5a059;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c5a059;
+    font-size: 1.8rem;
+    font-weight: 700;
+    transition: all 0.4s ease;
+}
+
+/* Jika menggunakan foto, tambahkan ini agar foto bulat pas */
+.team-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Saat Hover, Avatar membesar sedikit */
+.team-card:hover .team-avatar {
+    transform: scale(1.08);
+    background: #c5a059;
+    color: #111;
+}
+
+/* Teks Nama & Jabatan */
+.team-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+}
+
+.team-role {
+    display: block;
+    font-size: 0.8rem;
+    color: #c5a059;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* Garis Glow Emas Tipis di Bawah Kartu */
+.card-glow-line {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c5a059, transparent);
+}
+
+/* Tampilan Responsif untuk HP (Otomatis Menyesuaikan) */
+@media (max-width: 992px) {
+    .leader-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* ==========================================
+   SPONSOR ABOUT BOX (DESKRIPSI ACARA)
+   ========================================== */
+.sponsor-about-box {
+    background: rgba(18, 18, 22, 0.7);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 36px;
+    margin-top: 32px;
+    backdrop-filter: blur(12px);
+}
+
+.about-text {
+    color: #d0d0d8;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.about-text strong {
+    color: var(--text-white);
+    font-weight: 700;
+}
+
+/* GRID 2 KARTU DI DALAM DESKRIPSI */
+.about-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.about-card {
+    background: rgba(10, 10, 14, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 24px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.about-card:hover {
+    border-color: var(--border-color);
+    transform: translateY(-3px);
+}
+
+.about-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.icon-gold {
+    color: var(--gold-primary);
+    font-size: 1.5rem;
+}
+
+.about-card-header h3 {
+    color: var(--text-white);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.about-card p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* RESPONSIVE UNTUK HP & TABLET */
+@media (max-width: 768px) {
+    .about-cards-grid {
+        grid-template-columns: 1fr; /* Jadi 1 kolom di layar HP */
+    }
+    .sponsor-about-box {
+        padding: 24px;
+    }
+}
